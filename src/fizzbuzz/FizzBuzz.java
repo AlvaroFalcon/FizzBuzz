@@ -2,25 +2,39 @@ package fizzbuzz;
 
 public class FizzBuzz {
 
-    public static void checkFizzBuzz(int n) {
-        for (int i = 0; i <= n; i++) {
-            isFizzBuzz(i);
+    public static String checkFizzBuzz(int max) {
+        String fizzBuzzString = "";
+        for (int number = 0; number <= max; number++) {
+            fizzBuzzString = fizzBuzzToString(isFizzBuzz(number),fizzBuzzString);
         }
+        return fizzBuzzString;
     }
 
-    private static void isFizzBuzz(int i) {
-        if (i % 3 == 0) {
-            System.out.println(i % 5 == 0 ? i + ": FizzBuzz" : i + ": Fizz");
-        } else if (i % 5 == 0) {
-            System.out.println(i % 3 == 0 ? i + ": FizzBuzz" : i + ": Buzz");
+    private static String isFizzBuzz(int number) {
+        if (isFizz(number)) {
+            return isBuzz(number) ? number + ": FizzBuzz" : number + ": Fizz";
+        } else if (isBuzz(number)) {
+            return isFizz(number) ? number + ": FizzBuzz" : number + ": Buzz";
         } else {
-            System.out.println(i);
+            return number + "";
         }
 
     }
 
     public static void main(String[] args) {
-        checkFizzBuzz(100);
+        System.out.println(checkFizzBuzz(100));
+    }
+
+    private static boolean isFizz(int number) {
+        return number % 3 == 0;
+    }
+
+    private static boolean isBuzz(int number) {
+        return number % 5 == 0;
+    }
+
+    private static String fizzBuzzToString(String fizzBuzz, String fizzBuzzString) {
+        return fizzBuzzString + fizzBuzz + "\n";
     }
 
 }
