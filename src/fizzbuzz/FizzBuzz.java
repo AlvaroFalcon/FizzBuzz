@@ -2,39 +2,36 @@ package fizzbuzz;
 
 public class FizzBuzz {
 
+    public static String fizzBuzzToString(int number, String fizz, String buzz) {
+        return number+": " + fizz + buzz + "\n";
+    }
+
     public static String checkFizzBuzz(int max) {
         String fizzBuzzString = "";
         for (int number = 0; number <= max; number++) {
-            fizzBuzzString = fizzBuzzToString(isFizzBuzz(number),fizzBuzzString);
+            fizzBuzzString += isFizzBuzz(number);
         }
         return fizzBuzzString;
     }
 
     private static String isFizzBuzz(int number) {
-        if (isFizz(number)) {
-            return isBuzz(number) ? number + ": FizzBuzz" : number + ": Fizz";
-        } else if (isBuzz(number)) {
-            return isFizz(number) ? number + ": FizzBuzz" : number + ": Buzz";
-        } else {
-            return number + "";
-        }
-
+        return fizzBuzzToString(number,isFizz(number),isBuzz(number));
     }
 
+
+    private static String isFizz(int number) {
+        return isMult(number, 3) ? "Fizz" : "";
+    }
+
+    private static String isBuzz(int number) {
+        return isMult(number, 5) ? "Buzz" : "";
+    }
+
+    private static boolean isMult(int number, int divisor) {
+        return number % divisor == 0;
+    }
     public static void main(String[] args) {
         System.out.println(checkFizzBuzz(100));
-    }
-
-    private static boolean isFizz(int number) {
-        return number % 3 == 0;
-    }
-
-    private static boolean isBuzz(int number) {
-        return number % 5 == 0;
-    }
-
-    private static String fizzBuzzToString(String fizzBuzz, String fizzBuzzString) {
-        return fizzBuzzString + fizzBuzz + "\n";
     }
 
 }
